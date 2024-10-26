@@ -1,0 +1,26 @@
+import express from 'express';
+const app=express();
+app.use(express.json());
+const users = [{
+    name: "John",
+    kidneys: [{
+        healthy: false
+    }]
+}];
+app.get("/",function(req,res)
+{
+    let userslength=users.length;
+    console.log(userslength);
+    let h=0;
+    for(i=0;i<userslength;i++){
+        if (users[i].kidneys[0].healthy){
+            h++;
+        }
+    }
+    res.json({
+        h,
+        userslength
+    })
+
+});
+app.listen(3000);

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TODO List</title>
+</head>
+<body>
+  <input type="text" id="taskInput" placeholder="Enter task">
+  <button onclick="addTask()">Add Task</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText === '') return;
+
+      fetch('/todos', {
+        method: 'POST',
+        urlSearchParams: new URLSearchParams({ title: taskText })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const li = document.createElement('li');
+        li.textContent = data.title;
+        taskList.appendChild(li);
+        taskInput.value = '';
+      })
+      .catch(error => {
+        console.error('Error adding task:', error);
+      });
+    }
+  </script>
+</body>
+</html>

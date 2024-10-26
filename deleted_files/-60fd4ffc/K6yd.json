@@ -1,0 +1,16 @@
+[
+    {
+        "name":"sameer",
+        "intern":[{
+            "selected":true
+        }],
+        "age":20
+    },
+    {
+        "name":"ramu",
+        "intern":[{
+            "selected":false
+        }],
+        "age":50
+    }
+]

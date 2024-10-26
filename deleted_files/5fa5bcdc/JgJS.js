@@ -1,0 +1,15 @@
+import express, { json } from 'express';
+const app=express();
+app.use(express.json);
+import fs from 'fs';
+const users = [{
+    name: "John",
+    kidneys: [{
+        healthy: false
+    }]
+}];
+app.get("/",(req,res)=>
+{
+    res.send('jhi');
+})
+app.listen(3000);
