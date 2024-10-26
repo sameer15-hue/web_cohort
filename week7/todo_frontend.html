@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        async function signup(){
+            const name=document.getElementById("name").value;
+            const password=document.getElementById("password").value;
+            const email=document.getElementById("email").value;
+            const response=await axios.post("http://localhost:3000/signup",{
+                name:name,
+                email:email,
+                password:password
+            });
+            if (response.data.msg=="signup done!!"){
+                signin();
+            }else{
+                document.getElementById('info').innerHTML=response.data;
+            }
+        }
+        async function signin(){
+            const password=document.getElementById("password").value;
+            const email=document.getElementById("email").value;
+            const response=await axios.post("http://localhost:3000/signin",{
+                email:email,
+                password:password
+            });
+            if (response.data.done=="done"){
+                localStorage.setItem("token",response.data.token);
+            }else{
+            document.getElementById('info').innerHTML=response.data.msg;
+            }
+        }
+    </script>
+    <div>
+        <h1>LiveKar</h1>
+        <p> Find homes on few clicks now !!</p>
+        <input type="email" id="email"  placeholder="enter email"><br>
+        <input type="text" id="name" placeholder="Enter username"><br>
+        <input type="password" id="password" placeholder="Enter password"><br>
+
+        <button onclick="signin()" >signin</button>
+        <button onclick="signup()">signup</button>
+        <p id="info"></p>
+    </div>
+</body>
+</html>
