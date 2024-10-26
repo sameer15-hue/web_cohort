@@ -1,0 +1,13 @@
+import mongoose from "mongoose";
+import express from 'express';
+import 'dotenv/config';
+import { adminrouter } from "./routes/admin.js";
+import { userrouter } from "./routes/user.js";
+import { houserouter } from "./routes/house.js";
+mongoose.connect(process.env.mongodb_url).then(console.log("db connected"));
+const app=express();
+app.use(express.json());
+app.use("/admin",adminrouter);
+app.use("/user",userrouter);
+app.use("/house",houserouter);
+app.listen(3000);
