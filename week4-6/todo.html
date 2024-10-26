@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 300px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #list {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+        }
+        #list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #list .updateButton {
+            background-color: #28a745;
+            border: none;
+            margin-left: 10px;
+        }
+        #list .updateButton:hover {
+            background-color: #218838;
+        }
+        #list .deleteButton {
+            background-color: #dc3545;
+            border: none;
+            margin-left: 10px;
+        }
+        #list .deleteButton:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        async function sts(event) {
+            event.preventDefault();
+            let todo = document.getElementById('todo').value;
+            const response = await axios.post("http://localhost:3000/", {todo});
+            console.log(response);
+            display();
+        }
+        async function display() {
+            const response = await axios.get("http://localhost:3000/");
+            const list = document.getElementById('list');
+            list.innerHTML = "";
+            for (let i = 0; i < response.data.length; i++) {
+                const item = document.createElement('li');
+                item.textContent = response.data[i].todo;
+                const updateButton = document.createElement('button');
+                updateButton.textContent = 'Update';
+                updateButton.className = 'updateButton';
+                updateButton.onclick = function() {
+                    update(response.data[i].id);
+                }
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'deleteButton';
+                deleteButton.onclick = function() {
+                    deletion(response.data[i].id);
+                }
+                item.appendChild(updateButton);
+                item.appendChild(deleteButton);
+                list.appendChild(item);
+            }
+        }
+        async function update(id) {
+            const todo = prompt("Enter new todo");
+            if (todo != null) {
+                const response = await axios.put("http://localhost:3000/todo", {
+                    todo: todo,
+                    id: id
+                });
+            }
+            display();
+        }
+        async function deletion(id) {
+            await axios.delete("http://localhost:3000/todo", {
+                data: { id: id }
+            });
+            display();
+        }
+        display();
+    </script>
+    <form>
+        <label for="todo">Enter todo</label>
+        <input type="text" id="todo">
+        <button onclick="sts(event)">Submit</button>
+    </form>
+    <ul id="list"></ul>
+</body>
+</html>
