@@ -5,6 +5,13 @@ const count=atom({
     default:0, //you cant set name like number or something (should mention default only)
     key:'count'
 })
+const even=selector({
+    key:'even',
+    get:function({get}){
+        const number=get(count);//derived state from count
+        return number%2==0;
+    }
+})
 function Recoil(){
     return(//should wrap the parent component inside RecoilRoot
         <RecoilRoot>
@@ -19,6 +26,7 @@ function Counter(){
         <Currentcount/><br/>
         <Increase/>
         <Decrease/>
+        <Iseven/>
         </>
     )
 }
@@ -42,6 +50,14 @@ function Decrease(){
             <button onClick={()=>setcount(x=>x-1)}>decrease</button>
         </div>
     )
-    
 }   
+function Iseven(){
+    const number=useRecoilValue(even);
+    return(//if number return evertime true ,then no re-rendering,else re-render 
+        //so for every even increase no re-render of Iseven (optimized)
+        <div>
+            <p>{number?"even":"odd"}</p>
+        </div>
+    )
+}
 export default Recoil;
