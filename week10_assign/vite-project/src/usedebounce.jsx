@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 function usedebounce(value,delay){
     const [debounce,setdebounce]=useState(0);
     useEffect(function(){
+
+
         
         const timer =setTimeout(function(){
             console.log('entered');
@@ -14,3 +16,19 @@ function usedebounce(value,delay){
     return debounce;
 }
 export default usedebounce;
+
+
+// function usedebounce(url){
+//     const [timer,settimer]=useState(0);
+//     useEffect(function(){
+//         const timer = setTimeout(function(){
+//             let x=await.get(url);
+//             console.log(x.response);
+//             settimer(timer);
+//         })
+//         return function(){
+//             clearInterval(timer);
+//         }
+//     },[url]);
+    
+// }

@@ -1,10 +1,10 @@
 import {  } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Memo from './memo.jsx'
+import Cart from './Assignment/home.jsx'
 
 createRoot(document.getElementById('root')).render(
   <>
-    <Memo />
+    <Cart />
   </>,
 )

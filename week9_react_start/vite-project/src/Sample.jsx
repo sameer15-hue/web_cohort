@@ -24,7 +24,7 @@ function Sample() {
     ]);
   }
   function updatetodo(title) {
-    const newtodo = prompt('enter new todo!!');
+    const newtodo = document.getElementById('newtodo').value;
     settodo(function () {
       return (
         todos.map((item) => {
@@ -34,6 +34,12 @@ function Sample() {
         return item;
       }));
     });
+    return(
+      <div>
+        {/* <label id='newtodo'>enter newtodo!!</label> */}
+        <input type='text' id='newtodo' placeholder=' enter newtodo'></input>
+      </div>
+    )
   }
   function deletetodo(title){
     settodo(function (){

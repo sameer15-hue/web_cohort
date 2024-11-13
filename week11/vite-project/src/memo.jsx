@@ -38,3 +38,5 @@ function Iseven(){
 
 }
 export default Memo;
+//memo(builtin component) lets you skip re-renders if there is no change in props of child component
+// for example if parent component has child1(name) and child2(roll) then if name changed then no re-render in child2 component

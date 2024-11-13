@@ -61,3 +61,5 @@ function Iseven(){
     )
 }
 export default Recoil;
+
+//usecallback,usememo,useInterval,useTImeout
