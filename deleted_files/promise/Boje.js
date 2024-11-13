@@ -15,3 +15,4 @@ async function solve() {
 solve();
 //basically we cant make setTimeout synchronous ,we just write await part as assuming that seTimeout in promise is sync .
 // but its also async only.
+
