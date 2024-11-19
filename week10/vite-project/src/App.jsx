@@ -4,14 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
     const [timer,settimer]=useState(0);
     function start(){
         let value=setInterval(function(){
             setCount(count=>count+1)
         },1000);
         console.log(value) //setinterval will return interval id
-        settimer(value);
+        settimer(parseInt(value)+1);
     }
     function stop(){
         clearInterval(timer)

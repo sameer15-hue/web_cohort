@@ -11,7 +11,7 @@ function Counter(){
     const [count, setCount] = useState(0);
     return(
         <>
-        <Currentcount /><br/>
+        <Currentcount /> <br/>
         <Increase />
         <Decrease/>
         </>

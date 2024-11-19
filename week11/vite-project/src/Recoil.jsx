@@ -1,6 +1,8 @@
 import {atom,selector} from 'recoil';
 import { RecoilRoot,useSetRecoilState,useRecoilValue } from 'recoil';
 import './App.css';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
 const count=atom({
     default:0, //you cant set name like number or something (should mention default only)
     key:'count'
@@ -62,4 +64,4 @@ function Iseven(){
 }
 export default Recoil;
 
-//usecallback,usememo,useInterval,useTImeout
+//usecallback,usememo,useInterval,useTImeout,selector(refer notes)
