@@ -1,8 +1,9 @@
 // you can use @ts -ignore for ignoring ts formats (as libraries written in js and cant use in ts) 
 import 'dotenv/config';
 import express from 'express';
-import jsonwebtoken from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { usermodel } from './db';
+import authuser from './middlewear';
 const secretkey='ilovekiara'
 const app=express();
 app.use(express.json());
@@ -20,7 +21,6 @@ app.get('/api/v1/signup',async (req,res)=>{
             msg:'user already exist!'
         })
     }
-    // const token =jsonwebtoken.sign(username,secretkey);
 })
 app.get('/api/v1/signin',async (req,res)=>{
     const {username,password}=req.body;
@@ -29,18 +29,35 @@ app.get('/api/v1/signin',async (req,res)=>{
         password:password
     });
     if(founduser){
-        const token =jsonwebtoken.sign({
+        const token =jwt.sign({
             id:founduser._id.toString(),
         },secretkey);
-        res.json({msg:'signup done!'})
+        res.json({msg:token})
     }else{
         res.status(403).json({
             msg:'invalid username or password'
         })
     }
 })
-app.post('/api/v1/content',async (req,res)=>{
+app.use(authuser);
+app.get('/api/v1/content',async (req,res)=>{
     const {link,title}=req.body;
-
+    // @ts-ignore
+    const userid=req.id;
+    
 })
-app.listen(3000);
+app.post("/api/v1/content", (req, res) => {
+
+});
+app.delete("/api/v1/content", (req, res) => {
+
+});
+
+app.post("/api/v1/brain/share", (req, res) => {
+
+});
+
+app.get("/api/v1/brain/:shareLink", (req, res) => {
+
+});
+app.listen(3000,()=>console.log('server listening on port 3000'));
