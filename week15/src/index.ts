@@ -74,27 +74,31 @@ app.delete("/api/v1/content",async(req, res) => {
 });
 app.post("/api/v1/brain/share", async(req, res) => {
     const share=req.body.share;
-    const existinglink=linkmodel.findOne({
+    const existinglink=await linkmodel.findOne({
         //@ts-ignore
         user:req.id,
+        hash:share
     });
     if(existinglink){
         //@ts-ignore
-        const hash=existinglink.hash;
+        console.log(existinglink.user);
+        //@ts-ignore
+        const hash = existinglink.hash;
         res.json({
-            msg:"link already exists!! ",
             link:hash
         })
     }else{
         const link=await linkmodel.create({
             //@ts-ignore
             user:req.id,
-            hash:Math.floor(Math.random() * 9000000000) + 1000000000
-        }) 
+            hash:share
+        })
+        res.json({
+            msg:"link created"
+        })
    }
 });
-
 app.get("/api/v1/brain/:shareLink", (req, res) => {
-
+    
 });
 app.listen(3000,()=>console.log('server listening on port 3000'));
