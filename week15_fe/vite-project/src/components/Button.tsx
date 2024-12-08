@@ -2,6 +2,7 @@ import {ReactElement} from "react";
 interface Buttonprops{
     text:string,
     startsymbol?:ReactElement,
+    clicked?:()=>void,
     variant:"primary"|"secondary"
 }
 const defaultstyle="px-4 py-2 round-md font-weight: 500 flex items-center" ;
@@ -10,6 +11,6 @@ const variantClasses = {
     "secondary": "bg-purple-200 text-purple-400",
     };
 export default function Button(props:Buttonprops){
-    return <button className={variantClasses[props.variant]+" "+defaultstyle}>{props.startsymbol} {props.text}</button>
+    return <button  onClick={props.clicked} className={variantClasses[props.variant]+" "+defaultstyle}>{props.startsymbol} {props.text} </button>
     
 }
