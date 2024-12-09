@@ -2,25 +2,28 @@ import { useRef } from "react";
 import Button from "../components/Button";
 import { Input } from "../components/Input";
 import axios from "axios";
-import {backendurl} from '../../config';
+import { backendurl } from "../../config";
 import { useNavigate } from "react-router-dom";
-export function Signup() {
-    const userRef=useRef<HTMLInputElement>();// useref() create reference object with current set to undefined and accessed  by .current.focus() for any input field(type is not mentioned)
-    const passRef=useRef<HTMLInputElement>();//here HTMLInput is reference object to HTML element( TypeScript)
-    const nav =useNavigate();
+export function Signin() {
+    const userRef=useRef<HTMLInputElement>();
+    const passRef=useRef<HTMLInputElement>();
+    const nav=useNavigate();
     async function signup(){
       const username=userRef.current?.value;
       const password=passRef.current?.value;
+      console.log(username);
       //@ts-ignore
-      const response= await axios.post(backendurl+"/signup",{
+       const response=await axios.post(backendurl+"/signin",{
         username:username,
-        password:password,
+        password:password
       });
-      nav('/Signin');
+      const jwt=response.data.msg;
+      localStorage.setItem('token',jwt);
+      nav('/Dashboard');
     }
   return (
     <div className="h-screen w-screen bg-gray-200 flex flex-col justify-center items-center">
-      <span className="text-lg font-semibold mb-4">Signup</span>
+      <span className="text-lg font-semibold mb-4">Signin</span>
       <div className="bg-white border rounded-lg w-full max-w-sm p-6 shadow-md">
         <div className="mb-4">
           <Input  reference={userRef} placeholder="Enter name" onchange={() => {}} />

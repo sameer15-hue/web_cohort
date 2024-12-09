@@ -1,0 +1,1 @@
+export let backendurl="http://localhost:3000/api/v1"

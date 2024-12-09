@@ -4,8 +4,10 @@ import Card from "../components/Card";
 import Create from "../components/Addcontent";
 import { useState } from "react";
 import { Sidebar } from "../components/Sidebar";
+import { Usecontent } from "../components/Usecontent";
 function Dashboard() {
   const [model,setmodel]=useState(false);
+  const contents=Usecontent();
   return (
     <div className="border-3">
       <Sidebar/>
@@ -18,12 +20,16 @@ function Dashboard() {
         setmodel(true)}}/>
       </div>
       <div className="flex gap-4">
-      <Card title="React-Basics" link="https://www.youtube.com/watch?v=WvGexufMouA" type="yt"/>
-      <Card title="harkirat" link="https://x.com/im_saif2417/status/1865498780419911842" type="x"/>
+        {contents.map(({link,title})=><Card 
+        title={title} 
+        link={link} 
+        type="yt"
+        />)}
+      
+      {/* <Card title="harkirat" link="https://x.com/im_saif2417/status/1865498780419911842" type="x"/> */}
       </div>
     </div>
     </div>
   )
 }
-
 export default Dashboard; 

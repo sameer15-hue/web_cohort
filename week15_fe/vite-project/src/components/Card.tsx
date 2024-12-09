@@ -39,7 +39,7 @@ export default function Card(props: Cardprops) {
         {props.type == "x" && (
         <div className="pt-4  max-w-sm ">
           <blockquote className="twitter-tweet">
-            <a href={props.link.replace("x", "twitter")}></a>
+            <a href={props.link.replace("x.com", "twitter.com")}></a>
           </blockquote>
         </div>
       )}
