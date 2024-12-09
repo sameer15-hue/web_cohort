@@ -6,7 +6,9 @@ import { usermodel,contentmodel, linkmodel } from './db';
 import authuser from './middlewear';
 import generate from './random';
 import { findAncestor } from 'typescript';
+import cors from 'cors';
 const app=express();
+app.use(cors());
 app.use(express.json());
 app.post('/api/v1/signup',async (req,res)=>{
     const {username,password}=req.body;
@@ -45,9 +47,10 @@ app.get('/api/v1/content',async (req,res)=>{
     // @ts-ignore
     const userid=req.id;
     //console.log(userid);
-    const response=await contentmodel.findOne({
+    const response=await contentmodel.find({
         user:userid,
     }).populate("user","username");
+    console.log(response);
     res.json({
         content:response,
     })
@@ -63,7 +66,6 @@ app.post("/api/v1/content", async(req, res) => {
         tags:[]
     })
     res.json({msg:"content created!!"})
-
 });
 app.delete("/api/v1/content",async(req, res) => {
     const contentid=req.body.contentid;

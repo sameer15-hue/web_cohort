@@ -6,6 +6,7 @@ function authuser(req:Request,res:Response,next:NextFunction){
     if(response){
         // @ts-ignore
         req.id=response.id;
+        res.setHeader('X-Frame-Options', 'SAMEORIGIN');
         next();
     }else{
         res.status(401).json({message:'invalid token'})
