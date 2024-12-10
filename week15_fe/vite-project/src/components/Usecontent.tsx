@@ -5,17 +5,15 @@ import axios from "axios";
 export function Usecontent(){
     const [contents,setcontent]=useState([]);
     useEffect(function (){
-        let interval =setInterval(()=>async function display (){ 
-            await axios.get(backendurl+'/content',{
-                headers:{
-                    Authorization:localStorage.getItem('token')
-                }
-            }).then((response)=>setcontent(response.data.content))
-        },3000)
-        return ()=>{
-            clearInterval(interval);
-        }
-
+        async function display (){ 
+        await axios.get(backendurl+'/content',{
+            headers:{
+                Authorization:localStorage.getItem('token')
+            }
+        }).then((response)=>setcontent(response.data.content))
+    }
+    display();
+    
 },[])
     return contents;
 }

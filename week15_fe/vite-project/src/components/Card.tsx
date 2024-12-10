@@ -1,26 +1,26 @@
-import { Share } from "../Icons";
+import { Delete, Docicon, Share, Twiicon } from "../Icons";
 interface Cardprops {
   title: string;
   link: string;
-  type: "x" | "yt";
+  type: "x" | "yt"|"document";
 }
 export default function Card(props: Cardprops) {
   return (
     <div className="flex justify-between gap-3">
-      <div className="p-4 bg-white rounded-md border-gray-200 max-w-72 border-auto">
-        <div className="flex justify-between">
+      <div className="p-4 bg-white rounded-md border-gray-200 max-w-72  h-auto border-auto">
+        <div className="flex justify-between px-3">
           <div className="flex items-center text-sm">
-            <div className="text-gray-500 pr-2">
-              <Share />
+            <div className="text-gray-500 pr-2 flex  justify left">
+              {props.type=='yt' &&<Share/>}{props.type=="x" && <Twiicon/>} {props.type=='document' && <Docicon/>}
             </div>
           </div>
           {props.title}
           <div className="flex">
-            <div className="pr-2 text-gray-500">
-              <Share />
-            </div>
-            <div className="text-gray-500">
-              <Share />
+            <div className="pr-2 text-gray-500 ">
+            {<Share />}
+            </div>  
+            <div className="text-gray-500 justify-end">
+              {<Delete />}
             </div>
           </div>
         </div>

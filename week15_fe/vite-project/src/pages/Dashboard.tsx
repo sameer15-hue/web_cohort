@@ -8,6 +8,7 @@ import { Usecontent } from "../components/Usecontent";
 function Dashboard() {
   const [model,setmodel]=useState(false);
   const contents=Usecontent();
+  console.log(contents);
   return (
     <div className="border-3">
       <Sidebar/>
@@ -19,17 +20,18 @@ function Dashboard() {
       <Button variant="secondary" text="Add Content" startsymbol={<Plus/>} clicked={()=>{
         setmodel(true)}}/>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         {contents.map(({link,title})=><Card 
         title={title} 
         link={link} 
         type="yt"
         />)}
       
-      {/* <Card title="harkirat" link="https://x.com/im_saif2417/status/1865498780419911842" type="x"/> */}
+      <Card title="harkirat" link="https://x.com/im_saif2417/status/1865498780419911842" type="x"/>
       </div>
     </div>
     </div>
   )
 }
+
 export default Dashboard; 
