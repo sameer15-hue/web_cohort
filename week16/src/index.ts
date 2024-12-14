@@ -29,6 +29,6 @@ wss.on("connection",function(socket:any){
         }
     });
     socket.on("close",()=>{
-        allsockets = allsockets.filter((x)=>x.socket!==socket);
+        allsockets.pop();
     })
 })
